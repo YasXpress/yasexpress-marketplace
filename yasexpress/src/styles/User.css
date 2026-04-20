@@ -423,8 +423,28 @@ button:hover {
 }
 
 .add-cart {
-  margin-right: 10px; 
+  margin-right: 10px;
+  background: #ff6600;
+  transition: 0.3s ease;
 }
+
+/* SUCCESS STATE */
+.add-cart.added {
+  background: #22c55e; /* green */
+  transform: scale(1.05);
+}
+.add-cart.added {
+  background: #22c55e;
+  animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1.05); }
+}
+
+
 
 /* ================= CHECKOUT ================= */
 .checkout {

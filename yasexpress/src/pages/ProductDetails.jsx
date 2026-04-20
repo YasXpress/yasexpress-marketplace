@@ -3,7 +3,7 @@ import React, { useState } from "react";
 // ================= PRODUCT DETAILS =================
 const ProductDetails = ({ product, addToCart, setPage, products }) => {
   const [selectedImage, setSelectedImage] = useState(product.images?.[0]);
-
+  const [added, setAdded] = useState(false);
   const similar = [...products]
     .filter((p) => p.category === product.category && p._id !== product._id)
     .sort(() => Math.random() - 0.5)
@@ -42,8 +42,18 @@ const ProductDetails = ({ product, addToCart, setPage, products }) => {
             ₦{Number(product.price).toLocaleString()}
           </h3>
 
-          <button className="add-cart" onClick={() => addToCart(product)}>
-            Add to Cart
+          <button
+            className={`add-cart ${added ? "added" : ""}`}
+            onClick={() => {
+              addToCart(product);
+              setAdded(true);
+
+              setTimeout(() => {
+                setAdded(false);
+              }, 1500);
+            }}
+          >
+            {added ? "✓ Added" : "Add to Cart"}
           </button>
 
           <button

@@ -53,7 +53,7 @@ export default function App() {
         setLoading(true);
         setError(false);
 
-        const res = await axios.get(`${API}/products`);
+        const res = await axios.get(`${API}/api/products`);
 
         setProducts(res.data);
         setFilteredProducts(shuffleArray(res.data));
@@ -79,7 +79,7 @@ export default function App() {
   useEffect(() => {
     if (!user) return;
 
-    axios.get(`${API}/cart/${user._id}`).then((res) => {
+    axios.get(`${API}/api/cart/${user._id}`).then((res) => {
       if (res.data) setCart(res.data.items);
     });
   }, [user]);
@@ -88,7 +88,7 @@ export default function App() {
   const saveCart = async (updatedCart) => {
     if (!user) return;
 
-    await axios.post(`${API}/cart`, {
+    await axios.post(`${API}/api/cart`, {
       userId: user._id,
       items: updatedCart,
     });

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+// API
+import API from "../api/api";
 // ================= ACCOUNT =================
 const Account = ({ user, setUser, setPage, showToast }) => {
 
-  const API = "http://localhost:5000/api";
-
+   console.log(API)
   const formatPhoneForWhatsApp = (phone) => {
     if (!phone) return "";
 
@@ -48,7 +48,7 @@ const Account = ({ user, setUser, setPage, showToast }) => {
 
     try {
       if (isLogin) {
-        const res = await axios.post(`${API}/users/login`, {
+        const res = await axios.post(`${API}/api/users/login`, {
           email: form.email,
           password: form.password,
         });
@@ -64,7 +64,7 @@ const Account = ({ user, setUser, setPage, showToast }) => {
           return showToast("Enter a valid phone number", "error");
         }
 
-        const res = await axios.post(`${API}/users/register`, {
+        const res = await axios.post(`${API}/api/users/register`, {
           ...form,
           phone: formattedPhone,
         });
