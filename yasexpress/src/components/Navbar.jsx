@@ -28,7 +28,7 @@ const Navbar = ({ goToPage, cart, searchTerm, setSearchTerm, handleSearch }) => 
     <div className="nav-icons">
 
       {/* HOME */}
-      <div className="icon" onClick={() => goToPage("products")}>
+      <div className="icon home-icon" onClick={() => goToPage("products")}>
         <img
           src="https://res.cloudinary.com/dgmk0u6xc/image/upload/q_auto/f_auto/v1776526633/home_vwukrb.png"
           alt="Home"
