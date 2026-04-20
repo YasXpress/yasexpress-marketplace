@@ -6,10 +6,26 @@
   font-family: 'Poppins', sans-serif;
   transition: all 0.2s ease-in-out;
 }
+:root {
+  --text: #333;
+  --text-h: #111;
+  --bg: #ffffff;
+  --border: #e5e4e7;
+  --code-bg: #f4f3ec;
+  --accent: #ff6600;
+  --accent-bg: rgba(255, 102, 0, 0.1);
+  --accent-border: rgba(255, 102, 0, 0.5);
+  --shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px;
 
+  --font: 'Poppins', sans-serif;
+
+  color-scheme: light dark;
+}
 #root {
   width: 100%;
   min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 html, body {
@@ -21,8 +37,11 @@ html, body {
 
 
 body {
-  background: linear-gradient(to right, #f9f9f9, #f1f3f6);
-  color: #333; 
+  margin: 0;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
 }
 
 /* ================= BUTTON ================= */
@@ -773,7 +792,17 @@ button:hover {
 } 
 
 
-
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #9ca3af;
+    --text-h: #f3f4f6;
+    --bg: #16171d;
+    --border: #2e303a;
+    --accent: #c084fc;
+    --accent-bg: rgba(192, 132, 252, 0.15);
+    --shadow: rgba(0, 0, 0, 0.4) 0 10px 15px -3px;
+  }
+}
 
 
 
