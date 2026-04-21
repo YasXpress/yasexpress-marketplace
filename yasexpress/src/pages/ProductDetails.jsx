@@ -8,7 +8,15 @@ const ProductDetails = ({ product, addToCart, setPage, products }) => {
     .filter((p) => p.category === product.category && p._id !== product._id)
     .sort(() => Math.random() - 0.5)
     .slice(0, 6);
+  const goToCheckout = (product) => {
+    setPage("checkout");
+    addToCart(product);
 
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }; 
   return (
     <div>
       <div className="product-details">
@@ -56,12 +64,7 @@ const ProductDetails = ({ product, addToCart, setPage, products }) => {
             {added ? "✓ Added" : "Add to Cart"}
           </button>
 
-          <button
-            onClick={() => {
-              setPage("checkout");
-              addToCart(product);
-            }}
-          >
+          <button onClick={() => goToCheckout(product)}>
             Buy Now
           </button>
         </div>

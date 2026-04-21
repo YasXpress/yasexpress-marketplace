@@ -1,34 +1,13 @@
-import { useState } from "react";
-import axios from "axios";
+ 
+export default function Login({ 
+setAdmin, 
+showToast, 
+loginData, 
+setLoginData, 
+handleLogin }) {
+   
 
-const API = "http://localhost:5000/api";
-
-export default function Login({ setAdmin, showToast }) {
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
-  });
-
-  // ================= LOGIN =================
-  const handleLogin = async () => {
-    if (!loginData.email || !loginData.password) {
-      return showToast("Enter email and password", "error");
-    }
-
-    try {
-      const res = await axios.post(`${API}/users/login`, loginData);
-
-      // 🔥 CHECK ROLE FROM DATABASE
-      if (res.data.role !== "admin") {
-        return showToast("Access denied: Not an admin", "error");
-      }
-
-      setAdmin(res.data);
-      localStorage.setItem("yasexpressAdmin", JSON.stringify(res.data));
-    } catch (err) {
-      showToast("Login failed", "error");
-    }
-  };
+   
 
   return (
     <div className="login">

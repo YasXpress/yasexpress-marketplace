@@ -1,13 +1,4 @@
-import axios from "axios";
-
-const API = "http://localhost:5000/api";
-
-const formatMoney = (amount) => {
-  return new Intl.NumberFormat("en-NG", {
-    minimumFractionDigits: 0,
-  }).format(amount || 0);
-};
-
+ 
 export default function CustomerDetails({
   customer,
   goBack,
@@ -15,21 +6,10 @@ export default function CustomerDetails({
   showConfirm,
   loadCustomers,
   setSelectedCustomer,
+  formatMoney,
+  deleteCart
 }) {
-  // ================= DELETE CART =================
-  const deleteCart = async (userId) => {
-    showConfirm("Delete this cart?", async () => {
-      try {
-        await axios.delete(`${API}/cart/${userId}`);
-        setSelectedCustomer(null);
-        loadCustomers();
-        showToast("Cart deleted");
-      } catch {
-        showToast("Delete failed", "error");
-      }
-    });
-  };
-
+   
   return (
     <div className="customer-detail">
       <button onClick={goBack}>← Back</button>
@@ -43,7 +23,14 @@ export default function CustomerDetails({
       </p>
 
       <p>
-        <strong>Phone:</strong> {customer.phone || "No phone"}
+        <strong>Phone:</strong>{" "}
+        {customer.phone ? (
+          <a href={`tel:${customer.phone}`} className="phone-link">
+            {customer.phone}
+          </a>
+        ) : (
+          "No phone"
+        )}
       </p>
 
       <p>

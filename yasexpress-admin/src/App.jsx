@@ -30,7 +30,9 @@ export default function App() {
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
-  const [editProduct, setEditProduct] = useState(null);
+  const [editProduct, setEditProduct] = useState(null); 
+  const [productSearch, setProductSearch] = useState("");
+
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -70,6 +72,18 @@ export default function App() {
       showToast("Error loading products", "error");
     }
   };
+ 
+
+
+
+const filteredProducts = products.filter((p) => {
+  const query = productSearch.toLowerCase().trim();
+
+  return p.name?.toLowerCase().includes(query);
+});
+
+
+
 
   // ================= LOAD CUSTOMERS =================
   const loadCustomers = async () => {
@@ -192,8 +206,18 @@ export default function App() {
   setPage("add");
 };
 
-
-
+// ================= DELETE PRODUCT =================
+const handleDelete = async (id) => {
+  showConfirm("Delete this product?", async () => {
+    try {
+      await api.delete(`/api/products/${id}`);
+      loadProducts();
+      showToast("Product deleted");
+    } catch {
+      showToast("Delete failed", "error");
+    }
+  });
+};
 
   // ================= DELETE CART =================
   const deleteCart = async (userId) => {
@@ -261,12 +285,13 @@ export default function App() {
         {/* PRODUCTS */}
         {page === "products" && (
           <Products
-            products={products}
-            loadProducts={loadProducts}
-            showToast={showToast}
-            showConfirm={showConfirm}
-            handleEdit={handleEdit}
-          />
+          products={filteredProducts}
+          search={productSearch}
+          setSearch={setProductSearch}
+          handleEdit={handleEdit}
+          handleDelete={handleDelete}   // ✅ ADD THIS
+          formatMoney={formatMoney} 
+        />
         )}
 
         {/* ADD */}
@@ -302,7 +327,9 @@ export default function App() {
             showConfirm={showConfirm}
             loadCustomers={loadCustomers}
             setSelectedCustomer={setSelectedCustomer}
-            formatMoney={formatMoney}
+            formatMoney={formatMoney}  
+            deleteCart={deleteCart}
+
           />
         )}
 

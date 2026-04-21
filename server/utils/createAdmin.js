@@ -5,8 +5,8 @@ const createAdmin = async () => {
 
   if (!adminExists) {
     await User.create({
-      name: "Admin",
-      email: "admin@gmail.com",
+      name: "yahaya abullahi",
+      email: "yasxpress584@gmail.com",
       password: "123456",
       role: "admin",
     });
@@ -15,4 +15,4 @@ const createAdmin = async () => {
   }
 };
 
-export default createAdmin;
+export default createAdmin; 
