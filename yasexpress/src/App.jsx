@@ -195,7 +195,9 @@ export default function App() {
           cart={cart}
           setCart={setCart}
           setPage={setPage}
-          saveCart={saveCart}
+          saveCart={saveCart} 
+          products={products}
+
         />
       );
 

@@ -175,12 +175,12 @@ button:hover {
 /* ================= GRID ================= */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 22px;
   padding: 20px;
   padding-bottom: 100px;
 }
-
+ 
 /* ================= PRODUCT CARD ================= */
 .card {
   background: #fff;
@@ -723,11 +723,7 @@ margin-right: 10px;
     align-items: center;
   }
 
-  .cart-item {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
+  
 
   .images-container {
     flex-direction: row;
@@ -754,9 +750,22 @@ margin-right: 10px;
     width: 100%;
     max-width: 100%;
   }
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
 }
 
 
 
-
+@media (max-width: 650px) {
+  .cart-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
  

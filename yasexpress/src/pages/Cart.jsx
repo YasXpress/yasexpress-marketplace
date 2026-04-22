@@ -1,7 +1,7 @@
 import React from "react";
 
 // ================= CART =================
-const Cart = ({ cart, setCart, setPage, saveCart }) => {
+const Cart = ({ products, cart, setCart, setPage, saveCart }) => {
   const total = cart.reduce((acc, item) => acc + item.price * item.count, 0);
 
   const handleAdd = (index) => {
@@ -22,7 +22,16 @@ const Cart = ({ cart, setCart, setPage, saveCart }) => {
 
     setCart(newCart);
     saveCart(newCart);
+  }; 
+
+
+   
+
+
+  const getFullProduct = (id) => {
+    return products.find((p) => p._id === id);
   };
+
 
   return (
     <div className="cart">
@@ -46,11 +55,28 @@ const Cart = ({ cart, setCart, setPage, saveCart }) => {
           </button>
         </div>
       )}
-
+       
       {cart.map((item, i) => (
         <div className="cart-item" key={i}>
-          <img src={item.image} alt={item.name} className="cart-item-img" />
+          <img
+            src={item.image}
+            alt={item.name}
+            className="cart-item-img"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              const fullProduct = getFullProduct(item._id);
 
+              if (!fullProduct) return;
+
+              window.scrollTo({ top: 0, behavior: "smooth" });
+
+              setPage({
+                name: "details",
+                data: fullProduct,  
+              });
+            }}
+          />
+          
           <div className="cart-item-info">
             <h3>{item.name}</h3>
           </div>
@@ -66,7 +92,7 @@ const Cart = ({ cart, setCart, setPage, saveCart }) => {
           </div>
         </div>
       ))}
-
+       
       {cart.length > 0 && (
         <div className="cart-summary">
           <h3>Total: ₦{Number(total).toLocaleString()}</h3>

@@ -64,7 +64,14 @@ export default function CustomerDetails({
         </a>
       )}
 
-      <button onClick={() => deleteCart(customer.userId)}>
+      <button style={{
+        backgroundColor: "red",
+        color: "white",
+        border: "none",
+        padding: "10px 15px",
+        cursor: "pointer"
+      }} 
+      onClick={() => deleteCart(customer.userId)}>
         Delete Cart
       </button>
     </div>

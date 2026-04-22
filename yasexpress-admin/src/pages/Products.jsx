@@ -26,7 +26,14 @@ export default function Products({
 
             <div className="action-buttons">
               <button onClick={() => handleEdit(p)}>Edit</button>
-              <button onClick={() => handleDelete(p._id)}>
+              <button style={{
+                  backgroundColor: "red",
+                  color: "white",
+                  border: "none",
+                  padding: "10px 15px",
+                  cursor: "pointer"
+                }} 
+                onClick={() => handleDelete(p._id)}>
                 Delete
               </button>
             </div>
