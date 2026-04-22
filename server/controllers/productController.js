@@ -22,7 +22,9 @@ export const addProduct = async (req, res) => {
 
     for (let img of images) {
       if (img.startsWith("data:image")) {
-        const uploaded = await cloudinary.uploader.upload(img);
+        const uploaded = await cloudinary.uploader.upload(img, {
+          folder: "products",
+        });
         imageUrls.push(uploaded.secure_url);
       } else {
         imageUrls.push(img);
@@ -46,8 +48,32 @@ export const addProduct = async (req, res) => {
 // ================= DELETE PRODUCT =================
 export const deleteProduct = async (req, res) => {
   try {
+    const product = await Product.findById(req.params.id);
+
+    if (!product) {
+      return res.status(404).json("Product not found");
+    }
+
+    // DELETE IMAGES FROM CLOUDINARY
+    if (product.images && product.images.length > 0) {
+      for (let img of product.images) {
+        try {
+          // Extract public_id from URL
+          const parts = img.split("/");
+          const fileName = parts[parts.length - 1]; // last part
+          const publicId = fileName.split(".")[0]; // remove extension
+
+          await cloudinary.uploader.destroy(publicId);
+        } catch (err) {
+          console.log("Error deleting image:", err.message);
+        }
+      }
+    }
+
+    // DELETE PRODUCT FROM DB
     await Product.findByIdAndDelete(req.params.id);
-    res.json("Deleted");
+
+    res.json("Product and images deleted");
   } catch (err) {
     res.status(500).json(err);
   }
@@ -65,7 +91,9 @@ export const updateProduct = async (req, res) => {
 
     for (let img of images) {
       if (img.startsWith("data:image")) {
-        const uploaded = await cloudinary.uploader.upload(img);
+        const uploaded = await cloudinary.uploader.upload(img, {
+          folder: "products",
+        });
         imageUrls.push(uploaded.secure_url);
       } else {
         imageUrls.push(img);
