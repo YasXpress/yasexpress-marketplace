@@ -78,7 +78,7 @@ const ProductDetails = ({ product, addToCart, setPage, products }) => {
             {similar.map((p) => (
               <div className="card" key={p._id}>
                 <img
-                  src={p.image}
+                  src={p.images?.[0] || p.image}
                   alt={p.name}
                   style={{ cursor: "pointer" }}
                   onClick={() => setPage({ name: "details", data: p })}

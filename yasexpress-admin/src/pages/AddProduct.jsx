@@ -48,9 +48,11 @@ export default function AddProduct({
           onChange={handleImage}
         />
 
-        {form.images.map((img, i) => (
-          <img key={i} src={img} className="preview" />
-        ))}
+        <div className="preview-container">
+          {form.images.map((img, i) => (
+            <img key={i} src={img} className="preview" />
+          ))}
+        </div>
 
         <textarea
           placeholder="Description"
