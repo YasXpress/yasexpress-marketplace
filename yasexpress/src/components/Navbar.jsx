@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+ import React, { useState } from "react";
 
 const Navbar = ({
   goToPage,
@@ -64,21 +64,37 @@ const Navbar = ({
         <button onClick={handleSearch}>Search</button>
       </div>
 
-      {/* ICONS */}
-      <div className="nav-icons">
+      {/* NAV ICONS */}
+    <div className="nav-icons">
 
-        <div className="icon home-icon" onClick={() => goToPage("products")}>
-          <img src="https://res.cloudinary.com/dgmk0u6xc/image/upload/q_auto/f_auto/v1776526633/home_vwukrb.png" />
-        </div>
-
-        <div className="icon cart-icon" onClick={() => goToPage("cart")}>
-          <img src="https://res.cloudinary.com/dgmk0u6xc/image/upload/q_auto/f_auto/v1776526620/cart_wnr35d.png" />
-          <span className="cart-count">
-            {cart.reduce((acc, item) => acc + item.count, 0)}
-          </span>
-        </div>
-
+      {/* HOME */}
+      <div className="icon home-icon" onClick={() => goToPage("products")}>
+        <img
+          src="https://res.cloudinary.com/dgmk0u6xc/image/upload/q_auto/f_auto/v1776526633/home_vwukrb.png"
+          alt="Home"
+        />
       </div>
+
+      {/* CART */}
+      <div className="icon cart-icon" onClick={() => goToPage("cart")}>
+        <img
+          src="https://res.cloudinary.com/dgmk0u6xc/image/upload/q_auto/f_auto/v1776526620/cart_wnr35d.png"
+          alt="Cart"
+        />
+        <span className="cart-count">
+          {cart.reduce((acc, item) => acc + item.count, 0)}
+        </span>
+      </div>
+
+      {/* ACCOUNT */}
+      <div className="icon" onClick={() => goToPage("account")}>
+        <img
+          src="https://res.cloudinary.com/dgmk0u6xc/image/upload/q_auto/f_auto/v1776526644/1077114_mq7syi.png"
+          alt="Account"
+        />
+      </div>
+
+    </div>
     </div>
   );
 };
