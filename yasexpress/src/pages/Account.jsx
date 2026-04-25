@@ -5,7 +5,7 @@ import API from "../api/api";
 // ================= ACCOUNT =================
 const Account = ({ user, setUser, setPage, showToast }) => {
 
-   console.log(API)
+    
   const formatPhoneForWhatsApp = (phone) => {
     if (!phone) return "";
 

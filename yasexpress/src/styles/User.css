@@ -81,6 +81,8 @@ button:hover {
   display: flex;
   justify-content: center;
   gap: 10px;
+
+  position: relative; /* 🔥 IMPORTANT FIX */
 }
 
 .search {
@@ -110,6 +112,147 @@ button:hover {
 .search-div button:hover {
   background: #e65c00;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+.search-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+}
+.suggestions-box {
+  position: absolute;
+  top: calc(100% + 6px);
+
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 100%;
+  max-width: 480px; /* matches your input max-width */
+
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+
+  max-height: 340px;
+  overflow-y: auto;
+
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+
+  z-index: 99999;
+
+  animation: dropFade 0.18s ease;
+}
+
+/* smooth dropdown animation */
+@keyframes dropFade {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= ITEM ================= */
+.suggestion-item {
+  padding: 12px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #222;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  cursor: pointer;
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+  transition: all 0.18s ease;
+}
+
+/* hover = premium feel */
+.suggestion-item:hover {
+  background: linear-gradient(90deg, #f5f7ff, #ffffff);
+  color: #1a73e8;
+  padding-left: 18px;
+}
+
+/* active/touch state */
+.suggestion-item:active {
+  transform: scale(0.98);
+}
+
+/* last item */
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+/* ================= SCROLLBAR (PRO LOOK) ================= */
+.suggestions-box::-webkit-scrollbar {
+  width: 6px;
+}
+
+.suggestions-box::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.suggestions-box::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+}
+
+.suggestions-box::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+  .suggestions-box {
+    max-height: 260px;
+    border-radius: 12px;
+  }
+
+  .suggestion-item {
+    padding: 14px;
+    font-size: 15px;
+  }
+}
+
+/* ================= SMALL PHONE ================= */
+@media (max-width: 480px) {
+  .suggestions-box {
+    max-height: 220px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* ================= ICONS ================= */
 .nav-icons {
@@ -762,3 +905,90 @@ margin-right: 10px;
     text-align: center;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+
+  margin: 30px 0;
+}
+
+.pagination button {
+  padding: 8px 14px;
+  border-radius: 8px;
+
+  border: 1px solid #ddd;
+  background: #fff;
+  color: black;
+  cursor: pointer;
+  font-weight: 600;
+
+  transition: 0.2s ease;
+}
+
+.pagination button:hover {
+  background: #ff6600;
+  color: white;
+  border-color: #ff6600;
+  transform: translateY(-2px);
+}
+
+.active-page {
+  background: #ff6600 !important;
+  color: white !important;
+  border-color: #ff6600 !important;
+}
+
+.dots {
+  background: transparent;
+  border: none;
+  cursor: default;
+  font-weight: bold;
+  color: #888;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

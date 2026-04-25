@@ -81,7 +81,11 @@ const ProductDetails = ({ product, addToCart, setPage, products }) => {
                   src={p.images?.[0] || p.image}
                   alt={p.name}
                   style={{ cursor: "pointer" }}
-                  onClick={() => setPage({ name: "details", data: p })}
+                  onClick={() => {
+                    window.scrollTo(0, 0);
+                    setSelectedImage(p.images?.[0] || p.image);
+                    setPage({ name: "details", data: p })}
+                  }
                 />
 
                 <h3>{p.name}</h3>
@@ -90,8 +94,9 @@ const ProductDetails = ({ product, addToCart, setPage, products }) => {
                 <button
                   onClick={() => {
                     window.scrollTo(0, 0);
-                    setPage({ name: "details", data: p });
-                  }}
+                    setSelectedImage(p.images?.[0] || p.image);
+                    setPage({ name: "details", data: p })}
+                  }
                 >
                   View Product
                 </button>

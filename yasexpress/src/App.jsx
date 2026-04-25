@@ -29,6 +29,49 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [toast, setToast] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [maxButtons, setMaxButtons] = useState(6);
+  const [productsPerPage, setProductsPerPage] = useState(12);
+
+
+
+
+
+
+
+
+useEffect(() => {
+  const update = () => {
+    const width = window.innerWidth;
+
+    if (width < 400) {
+      setProductsPerPage(6);   // small phones
+    } 
+    else if (width < 768) {
+      setProductsPerPage(8);   // phones
+    } 
+    else if (width < 1024) {
+      setProductsPerPage(12);  // tablets
+    } 
+    else {
+      setProductsPerPage(16);  // desktop
+    }
+  };
+
+  update();
+  window.addEventListener("resize", update);
+
+  return () => window.removeEventListener("resize", update);
+}, []);
+
+
+
+
+
+
+
+
+
 
   const showToast = (message, type = "success") => {
     setToast(null);
@@ -126,41 +169,93 @@ export default function App() {
     saveCart(updatedCart);
   };
 
-  // ================= SEARCH =================
-  const handleSearch = () => {
-    const filtered = products.filter((p) => {
-      const term = searchTerm.toLowerCase();
+  
+// ================= SEARCH =================
+const filterProducts = () => {
+  const term = searchTerm.trim().toLowerCase();
 
-      return (
-        p.name.toLowerCase().includes(term) ||
-        p.category.toLowerCase().includes(term)
-      );
-    });
+  if (!term) {
+    setFilteredProducts(shuffleArray(products));
+    return;
+  }
 
-    setFilteredProducts(shuffleArray(filtered));
+  const filtered = products.filter((p) =>
+    p.name?.toLowerCase().includes(term) ||
+    p.category?.toLowerCase().includes(term) 
+  );
 
-    if (searchTerm.trim() !== "") {
-      setPage("products");
-    }
+  setFilteredProducts(shuffleArray(filtered));
+  setPage("products");
+};
+
+const handleSearch = () => {
+  filterProducts();
+};
+
+useEffect(() => {
+  filterProducts();
+}, [searchTerm, products]);
+
+
+
+
+// ================= SEARCH SUGGESTIONS =================
+const getSuggestions = (term) => {
+  const t = term.trim().toLowerCase();
+
+  if (!t) return [];
+
+  const matches = products
+    .filter((p) =>
+      p.name?.toLowerCase().includes(t) ||
+      p.category?.toLowerCase().includes(t)
+    )
+    .slice(0, 8); // limit results
+
+  return matches.map((p) => p.name);
+};
+
+
+// ================= PAGE PRODUCT PER TIME =================
+const indexOfLast = currentPage * productsPerPage;
+const indexOfFirst = indexOfLast - productsPerPage;
+
+const currentProducts = filteredProducts.slice(indexOfFirst, indexOfLast);
+
+
+
+const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
+
+
+
+
+
+useEffect(() => {
+  const updateButtons = () => {
+    const width = window.innerWidth;
+
+    if (width < 400) setMaxButtons(3);       // very small phones
+    else if (width < 768) setMaxButtons(4);  // phones
+    else if (width < 1024) setMaxButtons(5); // tablets
+    else setMaxButtons(6);                   // desktop
   };
 
-  useEffect(() => {
-    const filtered = products.filter((p) => {
-      const term = searchTerm.toLowerCase();
+  updateButtons(); // run once
 
-      return (
-        p.name.toLowerCase().includes(term) ||
-        p.category.toLowerCase().includes(term)
-      );
-    });
+  window.addEventListener("resize", updateButtons);
 
-    setFilteredProducts(shuffleArray(filtered));
+  return () => window.removeEventListener("resize", updateButtons);
+}, []);
 
-    if (searchTerm.trim() !== "") {
-      setPage("products");
-    }
-  }, [searchTerm, products]);
 
+
+
+
+
+
+
+ 
   // ================= PAGE NAVIGATION =================
   const goToPage = (page) => {
     setPage(page);
@@ -172,17 +267,21 @@ export default function App() {
     if (page === "home")
       return (
         <Home
-          products={filteredProducts}
+          products={currentProducts}
           setPage={setPage}
           loading={loading}
           error={error}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          totalPages={totalPages}
+          maxButtons={maxButtons}
         />
       );
 
     if (page === "products")
       return (
         <Home
-          products={filteredProducts}
+          products={products}
           setPage={setPage}
           loading={loading}
           error={error}
@@ -232,6 +331,7 @@ export default function App() {
         setSearchTerm={setSearchTerm}
         handleSearch={handleSearch}
         goToPage={goToPage}
+        suggestions={getSuggestions(searchTerm)}   // 👈 ADD THIS
       />
 
       {renderPage()}

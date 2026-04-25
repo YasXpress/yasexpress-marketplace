@@ -4,7 +4,7 @@ import React from "react";
 const ProductSkeleton = () => {
   return (
     <div className="grid">
-      {Array.from({ length: 8 }).map((_, i) => (
+      {Array.from({ length: 32 }).map((_, i) => (
         <div className="card skeleton-card" key={i}>
           <div className="skeleton-image"></div>
           <div className="skeleton-text"></div>
