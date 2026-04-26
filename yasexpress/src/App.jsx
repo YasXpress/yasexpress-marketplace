@@ -45,16 +45,16 @@ useEffect(() => {
     const width = window.innerWidth;
 
     if (width < 400) {
-      setProductsPerPage(6);   // small phones
+      setProductsPerPage(12);   // small phones
     } 
     else if (width < 768) {
-      setProductsPerPage(8);   // phones
+      setProductsPerPage(16);   // phones
     } 
     else if (width < 1024) {
-      setProductsPerPage(12);  // tablets
+      setProductsPerPage(24);  // tablets
     } 
     else {
-      setProductsPerPage(16);  // desktop
+      setProductsPerPage(32);  // desktop
     }
   };
 
@@ -281,10 +281,14 @@ useEffect(() => {
     if (page === "products")
       return (
         <Home
-          products={products}
+          products={currentProducts}
           setPage={setPage}
           loading={loading}
           error={error}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          totalPages={totalPages}
+          maxButtons={maxButtons}
         />
       );
 

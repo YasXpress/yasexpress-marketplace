@@ -139,7 +139,8 @@ button:hover {
 
   width: 100%;
   max-width: 480px; /* matches your input max-width */
-
+  min-width: 300px;
+  
   background: #fff;
   border-radius: 14px;
   border: 1px solid rgba(0, 0, 0, 0.08);

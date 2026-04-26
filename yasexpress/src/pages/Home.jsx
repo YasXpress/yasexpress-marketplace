@@ -82,44 +82,46 @@ const Home = ({
           </div>
 
           {/* ================= PAGINATION ================= */}
+        {totalPages > 1 && (
           <div className="pagination">
+            <button
+              disabled={currentPage === 1}
+              onClick={() => {
+                if (currentPage > 1) {
+                  window.scrollTo(0, 0);
+                  setCurrentPage(currentPage - 1);
+                }
+              }}
+            >
+              Prev
+            </button>
 
-  <button
-    onClick={() => {
-      if (currentPage > 1) {
-        window.scrollTo(0, 0);
-        setCurrentPage(currentPage - 1);
-      }
-    }}
-  >
-    Prev
-  </button>
+            {getPagination().map((num) => (
+              <button
+                key={`page-${num}`}
+                className={currentPage === num ? "active-page" : ""}
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                  setCurrentPage(num);
+                }}
+              >
+                {num}
+              </button>
+            ))}
 
-  {getPagination().map((num) => (
-  <button
-    key={`page-${num}`}   // ✅ FIXED UNIQUE KEY
-    className={currentPage === num ? "active-page" : ""}
-    onClick={() => {
-      window.scrollTo(0, 0);
-      setCurrentPage(num);
-    }}
-  >
-    {num}
-  </button>
-))}
-
-  <button
-    onClick={() => {
-      if (currentPage < totalPages) {
-        window.scrollTo(0, 0);
-        setCurrentPage(currentPage + 1);
-      }
-    }}
-  >
-    Next
-  </button>
-
-</div>
+            <button
+              disabled={currentPage === totalPages}
+              onClick={() => {
+                if (currentPage < totalPages) {
+                  window.scrollTo(0, 0);
+                  setCurrentPage(currentPage + 1);
+                }
+              }}
+            >
+              Next
+            </button>
+          </div>
+        )}
         </>
       )}
     </div>
