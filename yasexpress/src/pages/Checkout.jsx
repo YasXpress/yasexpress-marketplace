@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import axios from "axios";
- 
+import API from "../api/api"; 
 
-const API = "http://localhost:5000/api";//../api/api
+ 
 
 //"http://localhost:5000/api"
 
