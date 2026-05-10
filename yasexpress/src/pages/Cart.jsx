@@ -44,7 +44,7 @@ const Cart = ({ products, cart, setCart, setPage, saveCart }) => {
           />
           <h2>Your cart is empty</h2>
           <p>Looks like you haven’t added anything yet.</p>
-
+        
           <button
             onClick={() => {
               setPage("products");
@@ -53,6 +53,22 @@ const Cart = ({ products, cart, setCart, setPage, saveCart }) => {
           >
             Start Shopping
           </button>
+          {/* PAYMENT HISTORY LINK */}
+  <span
+    onClick={() => {
+      setPage("checkout"); // change this later if you create history page
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }}
+    style={{
+      marginLeft: "12px",
+      cursor: "pointer",
+      color: "#ff6600",
+      fontWeight: "600",
+      textDecoration: "underline",
+    }}
+  >
+     Payment History
+  </span>
         </div>
       )}
        
@@ -105,6 +121,22 @@ const Cart = ({ products, cart, setCart, setPage, saveCart }) => {
           >
             Proceed to Checkout
           </button>
+          {/* PAYMENT HISTORY LINK */}
+  <span
+    onClick={() => {
+      setPage("checkout"); // change this later if you create history page
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }}
+    style={{
+      marginLeft: "12px",
+      cursor: "pointer",
+      color: "#ff6600",
+      fontWeight: "600",
+      textDecoration: "underline",
+    }}
+  >
+     Payment History
+  </span>
         </div>
       )}
     </div>

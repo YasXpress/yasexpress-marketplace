@@ -3,7 +3,7 @@ import React from "react";
 // ================= FOOTER =================
 const Footer = ({ goToPage }) => {
 
-  const phoneNumber = "2349162820838";
+  const phoneNumber = "2348101040260";
 
   const openWhatsApp = () => {
     const message = "Hello, I want to make an enquiry.";
@@ -21,7 +21,7 @@ const Footer = ({ goToPage }) => {
             style={{ cursor: "pointer" }}
             onClick={() => goToPage("home")}
           >
-            YASEXPRESS Store
+            LILFARU COLLECTION Store
           </h2>
           <p>Affordable products, fast delivery, trusted sellers.</p>
         </div>
@@ -39,7 +39,7 @@ const Footer = ({ goToPage }) => {
         <div className="footer-contact">
           <h4>Contact</h4>
           <p>📍 Kaduna, Nigeria</p>
-          <p onClick={openWhatsApp}>📞 09162820838</p>
+          <p onClick={openWhatsApp}>📞 08101040260</p>
           <p onClick={openWhatsApp}>✉️ Chat on WhatsApp</p>
         </div>
 
@@ -54,7 +54,7 @@ const Footer = ({ goToPage }) => {
       </div>
 
       <div className="footer-bottom">
-        <p>© {new Date().getFullYear()} YASEXPRESS Store. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} LILFARU COLLECTION Store. All rights reserved.</p>
       </div>
     </footer>
   );

@@ -22,8 +22,8 @@ const Navbar = ({
       {/* LOGO */}
       <div className="nav-logo" onClick={() => goToPage("home")}>
         <img
-          src="https://res.cloudinary.com/dgmk0u6xc/image/upload/v1776270417/20260413-175424_zphykv.png"
-          alt="YASEXPRESS"
+          src="https://res.cloudinary.com/dgmk0u6xc/image/upload/q_auto/f_auto/v1777644287/Screenshot_20260501-113421_xfk3uf.png"
+          alt="LILFARU COLLECTION"
         />
       </div>
 

@@ -35,7 +35,7 @@ const ProductDetails = ({ product, addToCart, setPage, products }) => {
                 cursor: "pointer",
                 border:
                   selectedImage === img
-                    ? "2px solid orange"
+                    ? "2px solid #996515"
                     : "1px solid #ccc",
               }}
               onClick={() => setSelectedImage(img)}
